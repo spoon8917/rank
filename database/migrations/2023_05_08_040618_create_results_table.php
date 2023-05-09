@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->string('name',50);
             $table->string('score',200);
+            $table->foreignId('winner_id')->constrained('members');  
+            $table->foreignId('loser_id')->constrained('members');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
