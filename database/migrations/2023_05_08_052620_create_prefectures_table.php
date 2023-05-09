@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('prefectures', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('name',50);
-            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

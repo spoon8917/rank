@@ -17,11 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('comment', 200);
-            $table->timestamps();
-            $table->integer('point');
+            $table->string('img_path');
+            $table->foreignId('user_id')->constrained('users'); 
+            $table->integer('tournament_rank');
             $table->softDeletes();
+            $table->timestamps();
            
-            //img_path
             
         });
     }
