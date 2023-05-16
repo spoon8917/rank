@@ -12,15 +12,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\Sport;
+use App\Models\Prefecture;
+
 
 class RegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create(Sport $sport, Prefecture $prefecture): View
     {
-        return view('auth.register');
+        return view('auth.register')->with(['sports' => $sport->get()])->with(['prefectures' => $prefecture->get()]);
     }
 
     /**
@@ -34,12 +37,20 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'sport' => ['required', 'string'],
+            'prefecture' => ['required', 'string'],
+            'image' => ['required', 'string'],
+            'comment' => ['required', 'string', 'max:255'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'sport' =>$request->sport,
+            'prefecture'=>$request->prefecture,
+            'image'=>$request->image,
+            'comment'=>$request->comment,
         ]);
 
         event(new Registered($user));

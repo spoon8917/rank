@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use  App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +17,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', function() {
-    return view('front');
+Route::controller(Usercontroller::class)->group(function(){
+    Route::get('/','front')->middleware(['auth'])->name('front');
 });
+
+Route::post('/posts', [PostController::class, 'store']);
 
 
 Route::middleware('auth')->group(function () {
