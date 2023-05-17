@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
 
         <!-- Name -->
@@ -40,17 +40,17 @@
         </div>
          <div class="mt-4">
             <x-input-label for="sport" :value="__('Sport')" />
-            <select id="sport" class="block mt-1 w-full"  name="user[sport_id]">
+            <select id="sport" class="block mt-1 w-full"  name="sport_id">
                 @foreach($sports as $sport)
                     <option value="{{ $sport->id }}">{{ $sport->name }}</option>
                 @endforeach
             </select name="sport" :value="old('sport')" required autofocus autocomplete="sport" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-error :messages="$errors->get('sport')" class="mt-2" />
         </div>
         
           <div class="mt-4">
             <x-input-label for="prefecture" :value="__('Prefecture')" />
-            <select id="prefecture" class="block mt-1 w-full"  name="user[prefecture_id]">
+            <select id="prefecture" class="block mt-1 w-full"  name="prefecture_id">
                 @foreach($prefectures as $prefecture)
                     <option value="{{ $prefecture->id }}">{{ $prefecture->name }}</option>
                 @endforeach
