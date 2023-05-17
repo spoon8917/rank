@@ -13,6 +13,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    
+    public function Sport()
+    {
+        return $this->belongsTo(Sport::class);
+    }
+    
+    public function Prefecture()
+    {
+        return $this->belongsTo(Prefecture::class);
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -23,9 +33,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'sport',
-        'prefecture',
-        'image',
+        'sport_id',
+        'prefecture_id',
+        'img_path',
         'comment',
     ];
 
