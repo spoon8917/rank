@@ -29,5 +29,17 @@ class UserSeeder extends Seeder
                 'img_path'=>'a',
                 'comment'=>'a',
         ]);
+        
+         DB::table('users')->insert([
+                'name' => 'b',
+                'email' => 'b@b',
+                'password'=> Hash::make('password'),
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'sport_id' => 2,
+                'prefecture_id' => 2,
+                'img_path'=>'b',
+                'comment'=>'b',
+        ]);
     }
 }

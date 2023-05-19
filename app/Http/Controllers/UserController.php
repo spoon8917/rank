@@ -9,4 +9,7 @@ class UserController extends Controller
     public function front(){
         return view ('front');
     }
+    public function mypage(){
+        return view ('mypage');  
+    }
 }

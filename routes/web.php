@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use  App\Http\Controllers\UserController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MemberController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,11 +18,17 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::controller(Usercontroller::class)->group(function(){
-    Route::get('/','front')->middleware(['auth'])->name('front');
+Route::controller(Usercontroller::class)->middleware(['auth'])->group(function(){
+    Route::get('/','front')->name('front');
+    Route::get('/mypage','mypage')->name('mypage');
 });
 
-Route::post('/posts', [PostController::class, 'store']);
+Route::controller(Membercontroller::class)->middleware(['auth'])->group(function(){
+    Route::get('/members', 'show')->name('show');
+    Route::post('/member', 'store')->name('store');
+    Route::get('/members/create', 'create')->name('create');
+});
+
 
 
 Route::middleware('auth')->group(function () {
