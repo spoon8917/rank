@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('comment', 200);
             $table->string('img_path');
             $table->foreignId('user_id')->constrained('users'); 
-            $table->integer('tournament_rank');
+            $table->integer('rank');
             $table->softDeletes();
             $table->timestamps();
            
