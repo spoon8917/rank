@@ -23,6 +23,7 @@ class MemberController extends Controller
     }
     public function store(MemberRequest $request, Member $member)
     {
+        // dd($request);
         $img_path = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
         $user_id = Auth::id();
         $input = $request['member'];
@@ -30,5 +31,25 @@ class MemberController extends Controller
         $member->fill($input)->save();
         return redirect('/members');
     }
+    public function edit(Member $member){
+        return view('members/edit')->with(['member' => $member]);
+    }
+    public function update(MemberRequest $request, Member $member)
+    {
+        // dd($request);
+        $img_path = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        $user_id = Auth::id();
+        $input_member = $request['member'];
+        $input_member = $input_member + ['img_path' => $img_path] + ['user_id' => $user_id];
+        // dd($input_member);
+        $member->fill($input_member)->save();
+        return redirect('/members');
+    }
+    public function delete(Member $member)
+    {
+        $member->delete();
+        return redirect('/members');
+    }
+    
 
 }

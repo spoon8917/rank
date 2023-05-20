@@ -27,9 +27,10 @@ Route::controller(Membercontroller::class)->middleware(['auth'])->group(function
     Route::get('/members', 'show')->name('show');
     Route::post('/member', 'store')->name('store');
     Route::get('/members/create', 'create')->name('create');
+    Route::put('/members/{member}', 'update')->name('update');
+    Route::get('/members/{member}/edit', 'edit')->name('edit');
+    Route::delete('/members/{member}', 'delete')->name('delete');
 });
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
