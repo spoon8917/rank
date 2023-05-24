@@ -15,15 +15,15 @@
                     <img src="{{ $member->img_path }}" alt="画像が読み込めません。"/>
                     <p class='name'>{{ $member->name }}</h2>
                     <p class='comment'>{{ $member->comment }}</p>
-                    <p class='comment'>順位:{{ $member->rank }}</p>
+                    <p class='rank'>順位:{{ $member->rank }}</p>
                 </div>
                 <div class="edit"><a href="/members/{{ $member->id }}/edit">edit</a></div>
+                <form action="/members/{{$member->id}}" id="form_{{$member->id}}"  method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="button" onclick="deletePost({{$member->id}})">delete</button>
+                </form>
              @endif
-            <form action="/members/{{$member->id}}" id="form_{{$member->id}}"  method="POST">
-               @csrf
-               @method('DELETE')
-               <button type="button" onclick="deletePost({{$member->id}})">delete</button>
-            </form>
             @endforeach
         </div>
         <script>

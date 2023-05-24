@@ -10,6 +10,7 @@
     <body class="antialiased">
         <a href='/members'>メンバー表示</a>
         <a href='/members/create'>メンバー新規登録</a>
+        <a href='/match'>試合報告</a>
     </body>
     </x-app-layout>
     </html>
