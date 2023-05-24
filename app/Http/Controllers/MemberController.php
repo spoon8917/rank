@@ -12,15 +12,16 @@ use Illuminate\Support\Facades\Auth;
 
 class MemberController extends Controller
 {
-   public function show(User $user, Member $member)
+   public function index(Member $member)
     {
-        return view('members/member')->with(['members' => $member->get()])->with(['user' => $user->get()]);  
+        return view('members/index')->with(['members' => $member->orderBy('rank')->get()]);  
     }
     
    public function create(Sport $sport, Prefecture $prefecture)
     {
         return view('members/create')->with(['sports' => $sport->get()])->with(['prefectures' => $prefecture->get()]);
     }
+    
     public function store(MemberRequest $request, Member $member)
     {
         // dd($request);
@@ -34,6 +35,7 @@ class MemberController extends Controller
     public function edit(Member $member){
         return view('members/edit')->with(['member' => $member]);
     }
+    
     public function update(MemberRequest $request, Member $member)
     {
         // dd($request);
@@ -51,5 +53,37 @@ class MemberController extends Controller
         return redirect('/members');
     }
     
+    public function match(Member $member)
+    {
+        return view('members/match')->with(['members' => $member->get()]);
+    }
+    public function update_rank(Request $request, Member $member)
+    {
+    $winner_id = (int)$request['winner'];
+    $loser_id = (int)$request['loser'];
 
+    $winner = Member::find($winner_id);
+    $loser = Member::find($loser_id);
+
+    if ($winner->rank > $loser->rank) {
+        // 勝者と敗者のrankを設定
+        $new_rank_winner = $loser->rank;
+        $new_rank_loser = $loser->rank + 1;
+
+        // 勝者と敗者の間にいるメンバーのrankを1つ下げる（+1する）
+        Member::where('rank', '>=', $loser->rank)
+            ->where('rank', '<', $winner->rank)
+            ->increment('rank');
+
+        // 勝者のrankを更新
+        $winner->rank = $new_rank_winner;
+        $winner->save();
+
+        // 敗者のrankを更新
+        $loser->rank = $new_rank_loser;
+        $loser->save();
+        }
+
+    return redirect('/members');
+    }
 }

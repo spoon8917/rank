@@ -24,12 +24,14 @@ Route::controller(Usercontroller::class)->middleware(['auth'])->group(function()
 });
 
 Route::controller(Membercontroller::class)->middleware(['auth'])->group(function(){
-    Route::get('/members', 'show')->name('show');
+    Route::get('/members', 'index')->name('index');
     Route::post('/member', 'store')->name('store');
     Route::get('/members/create', 'create')->name('create');
     Route::put('/members/{member}', 'update')->name('update');
     Route::get('/members/{member}/edit', 'edit')->name('edit');
     Route::delete('/members/{member}', 'delete')->name('delete');
+    Route::get('/match', 'match')->name('match');
+    Route::put('/rank', 'update_rank')->name('update_rank');
 });
 
 Route::middleware('auth')->group(function () {
