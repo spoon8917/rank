@@ -23,7 +23,6 @@ class MemberSeeder extends Seeder
                 'img_path' => 'a',
                 'user_id' => 1,
                 'rank' => 1,
-                'deleted_at' => new DateTime(),
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
         ]);
@@ -34,7 +33,6 @@ class MemberSeeder extends Seeder
                 'img_path' => 'b',
                 'user_id' => 2,
                 'rank' => 2,
-                'deleted_at' => new DateTime(),
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
         ]);
@@ -45,9 +43,19 @@ class MemberSeeder extends Seeder
                 'img_path' => 'b',
                 'user_id' => 1,
                 'rank' => 2,
-                'deleted_at' => new DateTime(),
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
         ]);
+        
+        DB::table('members')->insert([
+                'name' => 'a所属のc',
+                'comment' => 'b',
+                'img_path' => 'b',
+                'user_id' => 1,
+                'rank' => 3,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+        ]);
+    
     }
 }

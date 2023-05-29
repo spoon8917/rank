@@ -23,6 +23,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Prefecture::class);
     }
+    
+    public function Tournaments()
+    {
+        return $this->belongsToMany(Tournament::class);
+    }
 
     /**
      * The attributes that are mass assignable.

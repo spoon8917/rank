@@ -4,6 +4,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\TournamentController;
+use App\Http\Controllers\MemberTournamentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +36,19 @@ Route::controller(Membercontroller::class)->middleware(['auth'])->group(function
     Route::get('/match', 'match')->name('match');
     Route::put('/rank', 'update_rank')->name('update_rank');
 });
+
+Route::controller(Tournamentcontroller::class)->middleware(['auth'])->group(function(){
+    Route::get('/tournament/create','create')->name('create');
+    Route::post('/tournament', 'store')->name('store');
+    Route::get('/tournaments','index')->name('index');
+});
+
+Route::controller(MemberTournamentcontroller::class)->middleware(['auth'])->group(function(){
+    Route::get('/member_tournament/create','create')->name('create');
+    Route::post('/member_tournament', 'store')->name('store');
+    // Route::get('/member_tournaments','index')->name('index');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
