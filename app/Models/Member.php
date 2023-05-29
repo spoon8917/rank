@@ -18,4 +18,13 @@ class Member extends Model
     'comment',
     'rank',
     ];
+    
+    public function tournaments()
+    {
+        return $this->belongsToMany(Tournament::class)
+        ->withPivot(['tournament_rank'])
+        ->withPivot(['created_at']) 
+        ->withPivot(['updated_at'])
+        ->withPivot(['deleted_at']);
+    }
 }

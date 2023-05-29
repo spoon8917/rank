@@ -14,12 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('member_tournament', function (Blueprint $table) {
-            $table->softDeletes();
-            $table->foreignId('member_id')->constrained();
-            $table->foreignId('tournament_id')->constrained();
+            $table->id();
+            $table->unsignedBigInteger('member_id');
+            $table->foreign('member_id')->references('id')->on('members');
+            $table->unsignedBigInteger('tournament_id');
+            $table->foreign('tournament_id')->references('id')->on('tournaments');
             $table->integer('tournament_rank');
-            $table->primary(['tournament_id', 'member_id']);  
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
