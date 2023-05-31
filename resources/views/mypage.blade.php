@@ -14,6 +14,7 @@
         <a href='/tournament/create'>大会で獲得するポイントの設定</a>
         <a href='/tournaments'>ポイント獲得量設定一覧</a>
         <a href='/member_tournament/create'>大会結果入力</a>
+        <a href='/member_tournaments'>選手の総合順位</a>
     </body>
     </x-app-layout>
     </html>

@@ -16,7 +16,12 @@ return new class extends Migration
         Schema::create('tournaments', function (Blueprint $table) {
             $table->id();
             $table->string('name',50);
-            $table->json('point_setting');
+            $table->integer('first');
+            $table->integer('second');
+            $table->integer('third');
+            $table->integer('best8')->nullable();
+            $table->integer('best16')->nullable();
+            $table->integer('best32')->nullable();
             $table->softDeletes();
             $table->timestamps();
             

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('comment', 200);
-            $table->string('img_path');
+            $table->string('img_path')->nullable();
             $table->foreignId('user_id')->constrained('users'); 
             $table->integer('rank');
             $table->softDeletes();

@@ -18,6 +18,12 @@ class Tournament extends Model
     
     protected $fillable = [
         'name',
-        'point_setting',
+        'first',
+        'second',
+        'third',
+        'best8',
+        'best16',
+        'best32,'
+        
     ];
 }

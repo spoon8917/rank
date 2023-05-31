@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+            Schema::table('users', function (Blueprint $table) {
             $table->foreignId('sport_id')->constrained();
             $table->foreignId('prefecture_id')->constrained();
             $table->string('img_path');
