@@ -1,11 +1,8 @@
-    <!DOCTYPE html>
-    <x-app-layout>
+<x-app-layout>
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>Ranking</title>  
-        <!-- Fonts -->
-        <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <title>Ranking</title>
     </head>
     
     <body class="antialiased">
@@ -16,7 +13,7 @@
                 @csrf
                 <p><select name="tournament">
                     @foreach($tournaments as $tournament)
-                        <option value="{{ $tournament->id }}">{{ $tournament->point_setting}}</option>
+                        <option value="{{ $tournament->id }}">{{ $tournament->name}}</option>
                     @endforeach
                     </select></p>
                 <h2>一位</h2>
@@ -35,9 +32,53 @@
                         @endif
                     @endforeach
                 </select></p>
+                <h2>三位</h2>
+                <p><select name='third'>
+                    @foreach($members as $member)
+                        @if(Auth::user()->can('view',$member))
+                            <option value="{{ $member->id }}">{{ $member->name}}</option>
+                        @endif
+                    @endforeach
+                </select></p>
+                <h2>ベスト8</h2>
+                <p>
+                    @foreach($members as $member)
+                        @if(Auth::user()->can('view',$member))
+                            <label>
+                                <input type="checkbox" value="{{ $member->id }}" name="best8[]">
+                                    {{$member->name}}
+                                </input>
+                            </label>
+                        @endif
+                    @endforeach
+                </p>
+                <h2>ベスト16</h2>
+                <p>
+                    @foreach($members as $member)
+                        @if(Auth::user()->can('view',$member))
+                            <label>
+                                <input type="checkbox" value="{{ $member->id }}" name="best16[]">
+                                    {{$member->name}}
+                                </input>
+                            </label>
+                        @endif
+                    @endforeach
+                </p>
+                <h2>ベスト32</h2>
+                <p>
+                    @foreach($members as $member)
+                        @if(Auth::user()->can('view',$member))
+                            <label>
+                                <input type="checkbox" value="{{ $member->id }}" name="best32[]">
+                                    {{$member->name}}
+                                </input>
+                            </label>
+                        @endif
+                    @endforeach
+                </p>
                 <input type="submit" value="store"/>
             </form>
         </div>
     </body>
-     </x-app-layout>
-    </html>
+</x-app-layout>
+    

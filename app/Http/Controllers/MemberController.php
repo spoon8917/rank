@@ -24,11 +24,12 @@ class MemberController extends Controller
     
     public function store(MemberRequest $request, Member $member)
     {
-        // dd($request);
-        $img_path = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
         $user_id = Auth::id();
-        $input = $request['member'];
-        $input = $input + ['img_path' => $img_path] + ['user_id' => $user_id];
+        $input = ['user_id' => $user_id] + $request['member'];
+        if($request->file('image')){
+            $img_path = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+            $input = $input + ['img_path' => $img_path]; 
+        }
         $member->fill($input)->save();
         return redirect('/members');
     }

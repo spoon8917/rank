@@ -17,5 +17,15 @@ class TournamentSeeder extends Seeder
      */
     public function run()
     {
+         DB::table('tournaments')->insert([
+                'name' => '大会1',
+                'first' => 30,
+                'second' => 20,
+                'third' => 10,
+                'best8' => 5,
+                'best16' => 1,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+         ]);
     }
 }

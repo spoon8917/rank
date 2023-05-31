@@ -21,7 +21,6 @@ class MemberRequest extends FormRequest
     {
         return [
             'member.name' => 'required|string|max:100',
-            'image' => 'required',
             'member.comment' => 'required|string|max:400',
             'member.rank' => 'required|integer',
         ];

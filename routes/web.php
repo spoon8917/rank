@@ -46,7 +46,7 @@ Route::controller(Tournamentcontroller::class)->middleware(['auth'])->group(func
 Route::controller(MemberTournamentcontroller::class)->middleware(['auth'])->group(function(){
     Route::get('/member_tournament/create','create')->name('create');
     Route::post('/member_tournament', 'store')->name('store');
-    // Route::get('/member_tournaments','index')->name('index');
+    Route::get('/member_tournaments','index')->name('index');
 });
 
 

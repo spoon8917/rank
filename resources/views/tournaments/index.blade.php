@@ -16,7 +16,8 @@
                     <h2>設定名</h2>
                     <p class='name'>{{ $tournament->name }}</p>
                      <h2>｛順位：ポイント数｝</h2>
-                    <p class='point_setting'>{{ $tournament->point_setting }}</p>
+                    <p class='first'>{{ $tournament->first }}</p>
+                    <p class='second'>{{ $tournament->second}}</p>
                 </div>
             @endforeach
     </body>
